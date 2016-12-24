@@ -1,6 +1,12 @@
 package com.sainath.db.utils;
 
+/**
+ * Wrapper class for Connection
+ * @author Sainath
+ *
+ */
 public final class ConnectionImplWrapper implements Connection{
+	
 	private Connection connection;
 	private boolean closed;
 	public ConnectionImplWrapper(Connection connection, boolean closed) {
@@ -54,4 +60,11 @@ public final class ConnectionImplWrapper implements Connection{
 	public void setClosed(boolean closed) {
 		this.closed = closed;
 	}
+
+	@Override
+	public String toString() {
+		return connection.toString();
+	}
+	
+	
 }

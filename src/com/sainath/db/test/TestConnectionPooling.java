@@ -6,14 +6,18 @@ import java.util.concurrent.Executors;
 import com.sainath.db.utils.Connection;
 import com.sainath.db.utils.ConnectionPoolManager;
 
+/**
+ * Test class
+ * @author Sainath
+ *
+ */
 public class TestConnectionPooling {
 	
 	public static void main(String[] args) throws Exception {
-		ConnectionPoolManager.class.getName();
-		//testConnectionPooling();
+		testConnectionPooling();
 		testUsingExecutor();
 		Thread.sleep(5000);
-		/*System.out.println("Getting last snapshot of database before terminating");
+		System.out.println("\n\n\nGetting last snapshot of database before terminating");
 		Thread.sleep(5000);
 		try {
 			Connection con = ConnectionPoolManager.getConnection();
@@ -22,12 +26,12 @@ public class TestConnectionPooling {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}*/
+		}
 	}
 
 	private static void testUsingExecutor() {
 		ExecutorService exe = Executors.newCachedThreadPool();
-		for (int i=1 ; i<2 ; i++) {
+		for (int i=1 ; i<10 ; i++) {
 			exe.submit(new Runnable() {
 				
 				@Override
@@ -38,8 +42,6 @@ public class TestConnectionPooling {
 						con.showDepartments();
 						con.close();
 						//con.showDepartments();
-						con = ConnectionPoolManager.getConnection();
-						con.showDepartments();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

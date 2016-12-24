@@ -4,13 +4,18 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * @author Sainath
+ * 
+ * This the sample database
+ *
+ */
 public final class Database {
-	Connection con = null;
+
 	private static List<Employee> empList = new CopyOnWriteArrayList<Employee>();
 	private static List<Department> deptList = new CopyOnWriteArrayList<Department>();
-	Database(Connection con) {
-		this.con = con;
-	}
+
+	//Test data
 	static {
 		Department d1 = new Department(1, "Account");
 		Department d2 = new Department(2, "Admin");
@@ -24,6 +29,11 @@ public final class Database {
 		empList.addAll(Arrays.asList(e1, e2, e3, e4, e5, e6));
 		deptList.addAll(Arrays.asList(d1, d2, d3));
 	}
+	
+	/**
+	 * Employee table 
+	 *
+	 */
 	private static class Employee {
 		int id;
 		String name;
@@ -43,6 +53,10 @@ public final class Database {
 		}
 	}
 	
+	/**
+	 * Department table
+	 *
+	 */
 	private static class Department {
 		int id;
 		String name;
@@ -55,7 +69,15 @@ public final class Database {
 			return "Department [id=" + id + ", name=" + name + "]\n";
 		}
 	}
-	public int addEmployee(String name, int deptID) throws Exception {
+	
+	/**
+	 * Adds an employee record with dept id
+	 * @param name
+	 * @param deptID
+	 * @return
+	 * @throws Exception
+	 */
+	public static int addEmployee(String name, int deptID, Connection con) throws Exception {
 		if(con == null)
 			throw new Exception("Connection is null");
 		int id = empList.size() + 1;
@@ -63,7 +85,14 @@ public final class Database {
 		return id;
 	}
 	
-	public int addEmployee(String name) throws Exception {
+	/**
+	 * Adds an employee record
+	 * 
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	public static int addEmployee(String name, Connection con) throws Exception {
 		if(con == null)
 			throw new Exception("Connection is null");
 		int id = empList.size() + 1;
@@ -71,7 +100,13 @@ public final class Database {
 		return id;
 	}
 	
-	public int addDepartment(String name) throws Exception {
+	/**
+	 * Adds a department
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
+	public static int addDepartment(String name, Connection con) throws Exception {
 		if(con == null)
 			throw new Exception("Connection is null");
 		int id = deptList.size() + 1;
@@ -79,14 +114,22 @@ public final class Database {
 		return id;
 	}
 	
-	public void showEmpList() throws Exception {
+	/**
+	 * Displays employee list
+	 * @throws Exception
+	 */
+	public static void showEmpList(Connection con) throws Exception {
 		if(con == null)
 			throw new Exception("Connection is null");
 		System.out.println(con + " is accessing empList");
 		System.out.println(empList);
 	}
 	
-	public void showDeptList() throws Exception {
+	/**
+	 * Displays department list
+	 * @throws Exception
+	 */
+	public static void showDeptList(Connection con) throws Exception {
 		if(con == null)
 			throw new Exception("Connection is null");
 		System.out.println(con + " is accessing deptList");
