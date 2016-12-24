@@ -9,7 +9,7 @@ import com.sainath.db.utils.ConnectionPoolManager.ConnectionPool;;
  * This class holds 
  *
  */
-public class ConnectionImpl implements Connection {
+class ConnectionImpl implements Connection {
 
 	private final ConnectionPool connectionPool;
 	private int id;
@@ -45,6 +45,7 @@ public class ConnectionImpl implements Connection {
 	public void close() {
 		//Synchronizing on connectionPool
 		synchronized (connectionPool) {
+			//on close new wrapper is created
 			connectionPool.addConnection(new ConnectionImplWrapper(this, false));
 			connectionPool.notify();
 			System.out.println("the connection "+ id + " released to pool by "+Thread.currentThread().getName());

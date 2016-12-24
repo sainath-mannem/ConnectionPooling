@@ -5,10 +5,10 @@ package com.sainath.db.utils;
  * @author Sainath
  *
  */
-public final class ConnectionImplWrapper implements Connection{
+final class ConnectionImplWrapper implements Connection{
 	
 	private Connection connection;
-	private boolean closed;
+	private boolean closed = false;
 	public ConnectionImplWrapper(Connection connection, boolean closed) {
 		this.connection = connection;
 		this.closed = closed;
